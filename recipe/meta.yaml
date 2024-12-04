@@ -1,0 +1,62 @@
+{% set name = "tiledb-soma-ml" %}
+{% set version = "0.0.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+# Cheat sheet:
+# wget 'https://pypi.io/packages/source/s/tiledb-soma-ml/tiledb-soma-ml-i.j.k.tar.gz'
+# shasum -a 256 tiledb-soma-ml-i.j.k.tar.gz
+source:
+  # As of 2024-12-04 there exist no releases at https://github.com/single-cell-data/TileDB-SOMA-ML/releases
+  # url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/tiledb-soma-ml-{{ version }}.tar.gz
+  # sha256: 25dab106aaf3f2d7d93318ba4a1d1a47c3728ca0ae192be1c838ff6622091ff8
+  git_url: https://github.com/TileDB-Inc/TileDB-SOMA-ML.git
+  git_rev: 2e9e5b1c71e72fccc7e65ac4007df5c0afe30238
+  git_depth: -1
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - python >=3.9,<4.dev0
+    - setuptools
+    - setuptools-scm
+    - wheel
+    - pip
+  run:
+    - python >=3.9
+    - anndata
+    - attrs >=22.1
+    - numba
+    - numpy >=1.21
+    - pandas
+    - pyarrow
+    - scipy
+    - shapely
+    - typing-extensions >=4.1 # For LiteralString
+# See also https://github.com/single-cell-data/SOMA/blob/VERSION-GOES-HERE/pyproject.toml
+
+test:
+  imports:
+    - tiledb-soma-ml
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  summary: SOMA PyTorch loaders
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - ryan-williams
+    - aaronwolen
+    - johnkerl
+    - Shelnutt2

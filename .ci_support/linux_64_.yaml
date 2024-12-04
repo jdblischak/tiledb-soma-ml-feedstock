@@ -1,0 +1,8 @@
+cdt_name:
+- cos7
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- tiledb main
+docker_image:
+- quay.io/condaforge/linux-anvil-cos7-x86_64
