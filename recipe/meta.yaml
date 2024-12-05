@@ -28,7 +28,7 @@ requirements:
   run:
     - python >=3.9
     - attrs >=22.2
-    - tiledbsoma >=1.9.0
+    - tiledbsoma-py >=1.9.0
     - pytorch >=2.0
     - torchdata <=0.9
     - numpy
