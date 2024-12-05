@@ -1,25 +1,22 @@
-{% set name = "tiledb-soma-ml" %}
-{% set version = "0.0.1" %}
+{% set name = "tiledbsoma-ml" %}
+{% set version = "0.1.0alpha" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 # Cheat sheet:
-# wget 'https://pypi.io/packages/source/s/tiledb-soma-ml/tiledb-soma-ml-i.j.k.tar.gz'
-# shasum -a 256 tiledb-soma-ml-i.j.k.tar.gz
+# wget 'https://github.com/single-cell-data/TileDB-SOMA-ML/archive/i.j.k.tar.gz'
+# shasum -a 256 i.j.k.tar.gz
 source:
-  # As of 2024-12-04 there exist no releases at https://github.com/single-cell-data/TileDB-SOMA-ML/releases
-  # url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/tiledb-soma-ml-{{ version }}.tar.gz
-  # sha256: 25dab106aaf3f2d7d93318ba4a1d1a47c3728ca0ae192be1c838ff6622091ff8
-  git_url: https://github.com/TileDB-Inc/TileDB-SOMA-ML.git
-  git_rev: 2e9e5b1c71e72fccc7e65ac4007df5c0afe30238
-  git_depth: -1
+  url: https://github.com/single-cell-data/TileDB-SOMA-ML/archive/{{ version }}.tar.gz
+  sha256: 92eeacac58e915c4923faccae221e740c9d7efc0a5c2e141eaef12b8b01c1df0f0
 
 build:
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
+  skip: true  # [not linux]
 
 requirements:
   host:
@@ -30,27 +27,26 @@ requirements:
     - pip
   run:
     - python >=3.9
-    - anndata
-    - attrs >=22.1
+    - attrs >=22.2
+    - tiledbsoma >=1.9.0
+    - pytorch >=2.0
+    - torchdata <=0.9
+    - numpy
     - numba
-    - numpy >=1.21
     - pandas
     - pyarrow
     - scipy
-    - shapely
-    - typing-extensions >=4.1 # For LiteralString
-# See also https://github.com/single-cell-data/SOMA/blob/VERSION-GOES-HERE/pyproject.toml
 
 test:
   imports:
-    - tiledb-soma-ml
+    - tiledbsoma_ml
   commands:
     - pip check
   requires:
     - pip
 
 about:
-  summary: SOMA PyTorch loaders
+  summary: Machine learning tools for use with tiledbsoma (SOMA PyTorch loaders)
   license: MIT
   license_file: LICENSE
 
@@ -60,3 +56,4 @@ extra:
     - aaronwolen
     - johnkerl
     - Shelnutt2
+    - jdblischak
