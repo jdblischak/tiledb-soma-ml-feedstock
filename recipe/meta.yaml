@@ -10,7 +10,7 @@ package:
 # shasum -a 256 i.j.k.tar.gz
 source:
   url: https://github.com/single-cell-data/TileDB-SOMA-ML/archive/{{ version }}.tar.gz
-  sha256: 92eeacac58e915c4923faccae221e740c9d7efc0a5c2e141eaef12b8b01c1df0f0
+  sha256: 92eeacac58e915c4923faccae221e740c9d7efc0a5c2e141eaef12b8b01c1df0
 
 build:
   noarch: python
