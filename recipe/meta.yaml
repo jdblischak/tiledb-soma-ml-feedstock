@@ -42,8 +42,12 @@ test:
     - tiledbsoma_ml
   commands:
     - pip check
+    - pytest -v tests
   requires:
     - pip
+    - pytest
+  source_files:
+    - tests/
 
 about:
   summary: Machine learning tools for use with tiledbsoma (SOMA PyTorch loaders)
