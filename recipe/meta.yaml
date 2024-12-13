@@ -20,13 +20,13 @@ build:
 
 requirements:
   host:
-    - python >=3.9,<4.dev0
+    - python {{ python_min }}
     - setuptools
     - setuptools-scm
     - wheel
     - pip
   run:
-    - python >=3.9
+    - python >={{ python_min }}
     - attrs >=22.2
     - tiledbsoma-py >=1.9.0
     - pytorch >=2.0
@@ -42,8 +42,13 @@ test:
     - tiledbsoma_ml
   commands:
     - pip check
+    - pytest -v tests
   requires:
     - pip
+    - pytest
+    - python {{ python_min }}
+  source_files:
+    - tests/
 
 about:
   summary: Machine learning tools for use with tiledbsoma (SOMA PyTorch loaders)

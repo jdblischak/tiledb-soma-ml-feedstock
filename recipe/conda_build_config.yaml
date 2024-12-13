@@ -2,3 +2,5 @@ channel_sources:
   - conda-forge,tiledb
 channel_targets:
   - tiledb main
+python_min:
+  - "3.9"
