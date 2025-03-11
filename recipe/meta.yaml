@@ -1,28 +1,30 @@
 {% set name = "tiledbsoma-ml" %}
-{% set version = "0.1.0alpha2" %}
+{% set version = "0.1.0a4" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 # Cheat sheet:
-# wget 'https://github.com/single-cell-data/TileDB-SOMA-ML/archive/i.j.k.tar.gz'
+# wget 'https://github.com/single-cell-data/TileDB-SOMA-ML/archive/vi.j.k.tar.gz'
 # shasum -a 256 i.j.k.tar.gz
 source:
-  url: https://github.com/single-cell-data/TileDB-SOMA-ML/archive/{{ version }}.tar.gz
-  sha256: ac8733e36accbd427840b844f3d735cb86783132bebc284f31588001b04fadd4
+  url: https://github.com/single-cell-data/TileDB-SOMA-ML/archive/v{{ version }}.tar.gz
+  sha256: 80f6d77585ec225753ac0717551eaaf3eaf6de19ac563dd61cd9ca460c89afd6
 
 build:
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script: >-
+    SETUPTOOLS_SCM_PRETEND_VERSION="{{ version }}"
+    {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
   skip: true  # [not linux]
 
 requirements:
   host:
     - python {{ python_min }}
-    - setuptools
-    - setuptools-scm
+    - setuptools >=64
+    - setuptools-scm >=8
     - wheel
     - pip
   run:
@@ -30,7 +32,6 @@ requirements:
     - attrs >=22.2
     - tiledbsoma-py >=1.9.0
     - pytorch >=2.0
-    - torchdata <=0.9
     - numpy
     - numba
     - pandas
@@ -41,6 +42,7 @@ test:
   imports:
     - tiledbsoma_ml
   commands:
+    - python -c "import tiledbsoma_ml as soma_ml; print(soma_ml.__version__)" | grep -q {{ version }}
     - pip check
     - pytest -v tests
   requires:
