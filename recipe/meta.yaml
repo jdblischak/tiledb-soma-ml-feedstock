@@ -14,7 +14,9 @@ source:
 
 build:
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script: >-
+    SETUPTOOLS_SCM_PRETEND_VERSION="{{ version }}"
+    {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
   skip: true  # [not linux]
 
@@ -41,6 +43,7 @@ test:
   imports:
     - tiledbsoma_ml
   commands:
+    - python -c "import tiledbsoma_ml as soma_ml; print(soma_ml.__version__)" | grep -q {{ version }}
     - pip check
     - pytest -v tests
   requires:
