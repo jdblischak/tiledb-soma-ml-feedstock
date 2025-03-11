@@ -1,15 +1,15 @@
 {% set name = "tiledbsoma-ml" %}
-{% set version = "v0.1.0a4" %}
+{% set version = "0.1.0a4" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 # Cheat sheet:
-# wget 'https://github.com/single-cell-data/TileDB-SOMA-ML/archive/i.j.k.tar.gz'
+# wget 'https://github.com/single-cell-data/TileDB-SOMA-ML/archive/vi.j.k.tar.gz'
 # shasum -a 256 i.j.k.tar.gz
 source:
-  url: https://github.com/single-cell-data/TileDB-SOMA-ML/archive/{{ version }}.tar.gz
+  url: https://github.com/single-cell-data/TileDB-SOMA-ML/archive/v{{ version }}.tar.gz
   sha256: 80f6d77585ec225753ac0717551eaaf3eaf6de19ac563dd61cd9ca460c89afd6
 
 build:
