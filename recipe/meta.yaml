@@ -1,5 +1,5 @@
 {% set name = "tiledbsoma-ml" %}
-{% set version = "0.1.0alpha2" %}
+{% set version = "v0.1.0a4" %}
 
 package:
   name: {{ name|lower }}
@@ -10,7 +10,7 @@ package:
 # shasum -a 256 i.j.k.tar.gz
 source:
   url: https://github.com/single-cell-data/TileDB-SOMA-ML/archive/{{ version }}.tar.gz
-  sha256: ac8733e36accbd427840b844f3d735cb86783132bebc284f31588001b04fadd4
+  sha256: 80f6d77585ec225753ac0717551eaaf3eaf6de19ac563dd61cd9ca460c89afd6
 
 build:
   noarch: python
