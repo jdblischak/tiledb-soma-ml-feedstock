@@ -23,8 +23,8 @@ build:
 requirements:
   host:
     - python {{ python_min }}
-    - setuptools
-    - setuptools-scm
+    - setuptools >=64
+    - setuptools-scm >=8
     - wheel
     - pip
   run:
@@ -32,7 +32,6 @@ requirements:
     - attrs >=22.2
     - tiledbsoma-py >=1.9.0
     - pytorch >=2.0
-    - torchdata <=0.9
     - numpy
     - numba
     - pandas
